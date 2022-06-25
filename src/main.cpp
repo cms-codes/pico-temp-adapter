@@ -11,7 +11,7 @@ int main(void) {
   _i2c_init();
   if (!sensor1.bmp_begin()) {
     while (true)
-      printf("Did not find Si7021 sensor!\n");
+      printf("Did not find BMP180 sensor!\n");
   }
   
   while (true) {
