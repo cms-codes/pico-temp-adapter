@@ -9,13 +9,13 @@ int main(void) {
   stdio_init_all();
   sleep_ms(2000);
   _i2c_init();
-  if (!sensor1.bmp_begin()) {
+  if (!sensor1.Begin()) {
     while (true)
       printf("Did not find BMP180 sensor!\n");
   }
   
   while (true) {
-    printf("%4.3f C\n", sensor1.bmp_get_temperature());
+    printf("%4.3f C\n", sensor1.GetTemperature());
     sleep_ms(2000);
   }
 
