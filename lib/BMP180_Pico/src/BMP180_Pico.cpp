@@ -85,11 +85,11 @@ uint16_t BMP180_Pico::GetTemperatureRaw(void) {
   int32_t temp_raw = 0;
   const uint8_t temp_read_trig[2] = { BMP_READ_REQ_ADDR, BMP_TEMP_REQ_CMD };
   const uint8_t temp_read_addr = BMP_READ_ADDR;
-
+  
   // initiate a reading of the temperature sensor
   i2c_write_blocking(i2c0, BMP_ADDR, temp_read_trig, 2, true );
   // delay 4.5ms
-  sleep_us(kSamplingDelayTable[0]);
+  busy_wait_us(kSamplingDelayTable[0]);
   // fetch the reading
   i2c_write_blocking(i2c0, BMP_ADDR, &temp_read_addr, 1, true);
   i2c_read_blocking(i2c0, BMP_ADDR, temp_parts, BMP_TEMP_READ_LEN, false);
@@ -124,7 +124,6 @@ float BMP180_Pico::GetTemperature(void) {
   temp_calibrated = (B5 + 8) / (pow(2,4));
   
   return temp_calibrated / 10.0f;
-
 }
 
 /********* BMP180_Pico::GetPressureRaw *******
@@ -144,7 +143,7 @@ uint32_t BMP180_Pico::GetPressureRaw(void) {
   const uint8_t press_read_addr = BMP_READ_ADDR;
 
   i2c_write_blocking(i2c0, BMP_ADDR, press_read_trigger, 2, true);
-  sleep_us(kSamplingDelayTable[this->sampling_mode_]);
+  busy_wait_us(kSamplingDelayTable[this->sampling_mode_]);
   i2c_write_blocking(i2c0, BMP_ADDR, &press_read_addr, 1, true);
   i2c_read_blocking(i2c0, BMP_ADDR, press_parts, BMP_PRESS_READ_LEN, false);
 

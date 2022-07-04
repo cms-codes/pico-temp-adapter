@@ -4,6 +4,7 @@
 #include <math.h>
 #include <stdio.h>
 #include "hardware/i2c.h"
+#include "hardware/gpio.h"
 
 #define BMP_ADDR 0x77
 #define BMP_READ_REQ_ADDR 0xF4
