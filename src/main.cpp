@@ -38,10 +38,10 @@ int main(void) {
       spi_float_to_bytes(&temp_reading, spi_out, sizeof(temp_reading));
       if (spi_is_readable(spi0)) {
         spi_read_blocking(spi0, 0, spi_in, 1);
-          if (spi_in[0] == 0xAC) {
-            // command for send temperature reading
-            spi_write_read_blocking(spi0, spi_out, spi_in, sizeof(temp_reading));    
-          }
+        if (spi_in[0] == 0xAC) {
+          // command for sending temperature reading
+          spi_write_read_blocking(spi0, spi_out, spi_in, sizeof(temp_reading));    
+        }
       }
       // transaction complete, reset flag
       SPI_flag = 0;
